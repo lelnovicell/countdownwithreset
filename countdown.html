@@ -1,0 +1,141 @@
+<head>
+    <style>
+    body {
+   background-image: linear-gradient(to right, #225e9e 0%, #712c69 100%);
+}
+
+.card {
+  width: 80%;
+  margin: 2% auto;
+  padding: 2% 5%;
+  border-radius: 10px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+  background-color: #ffffff;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.module {
+  margin: 5%;
+}
+
+.countdown {
+text-align: center;
+font-size: 6rem;
+}
+
+.countdown__time {
+  display: inline-block;
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+  border-radius: 6px;
+  color: #000000;
+  background-color: rgba(0, 0, 0, .1);
+}
+
+.countdown__time--orange {
+  color: orange;
+  border: 3px solid orange;
+}
+
+.countdown__time--red {
+  color: red;
+  border: 3px solid red;
+  animation: vibrate .5s 0s forwards;
+}
+
+$pixelPath: 4px;
+
+@keyframes vibrate {
+   0%     {left:-$pixelPath; right:-$pixelPath;}
+  12.5%  {left:$pixelPath; right:0px;}
+  25.0%  {left:-$pixelPath; right:$pixelPath;}
+  37.5%  {left:0px; right:-$pixelPath;}
+  50.0%  {left:0px; right:$pixelPath;}
+  62.5%  {left:$pixelPath; right:-$pixelPath;}
+  75.0%  {left:-$pixelPath; right:0;}
+  87.5%  {left:$pixelPath; right:$pixelPath;}
+  100%   {left:0px; right:$pixelPath;}
+}
+
+button {
+  padding: 2% 6%;
+  background-color: #31383e;
+  color: #ffffff;
+  font-size: 35%;
+  border-radius: 6px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, .5);
+  margin: 20px;
+}
+
+button:hover {
+  background-color: #666666;
+  transform:translateY(-1px);
+}
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+    jQuery(function($) {
+//   Function counts down from 1 minute, display turns orange at 20 seconds and red at 5 seconds.
+  var countdownTimer = {
+    init: function() {
+        this.cacheDom();
+        this.render();
+    },
+    cacheDom: function() {
+        this.$el = $('.countdown');
+        this.$time = this.$el.find('.countdown__time');
+        this.$reset = this.$el.find('.countdown__reset');
+    },
+    // bindEvents: function() {
+    //   this.$reset.on('click', this.resetTimer.bind(this));
+    // },
+    render: function() {
+        var totalTime = 60*5,
+            display = this.$time;
+        this.startTimer(totalTime, display);
+        this.$time.removeClass('countdown__time--red');
+      this.$time.removeClass('countdown__time--orange');
+    }, 
+    startTimer: function(duration, display, icon) {
+      var timer = duration, minutes, seconds;
+      var interval = setInterval(function() {
+      minutes = parseInt(timer / 60, 10);
+       seconds = parseInt(timer % 60, 10);
+       minutes = minutes < 10 ? '0' + minutes : minutes;
+       seconds = seconds < 10 ? '0' + seconds : seconds;
+       display.text(minutes + ':' + seconds);
+        if (--timer < 0) {
+          clearInterval(interval);
+        };
+      if (timer < 20) {
+          display.addClass('countdown__time--orange')
+        };
+        if (timer < 5) {
+          display.addClass('countdown__time--red')
+        };
+      }, 1000);
+      this.$reset.on('click', function() {
+          clearInterval(interval);
+        countdownTimer.render();  
+        }); 
+    },
+};
+countdownTimer.init();
+});
+    </script>
+</head>
+<body>
+<div class="card">
+    <h1>Modular Countdown</h1>
+    <p>This timer counts down from 1 minute. At 20 seconds left, the text and border turn orange. At 5 seconds left, the text and border turn red and the display vibrates.<p>
+    <div class="module">
+    <div class="countdown">
+     <div class="countdown__time">
+      </div>
+    <button class="countdown__reset">Reset Timer</button>
+  </div>
+    </div>
+  </div>
+</body>  

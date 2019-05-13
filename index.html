@@ -92,7 +92,7 @@ button:hover {
     //   this.$reset.on('click', this.resetTimer.bind(this));
     // },
     render: function() {
-        var totalTime = 60*5,
+        var totalTime = 60*1,
             display = this.$time;
         this.startTimer(totalTime, display);
         this.$time.removeClass('countdown__time--red');
@@ -128,8 +128,8 @@ countdownTimer.init();
 </head>
 <body>
 <div class="card">
-    <h1>Modular Countdown</h1>
-    <p>This timer counts down from 1 minute. At 20 seconds left, the text and border turn orange. At 5 seconds left, the text and border turn red and the display vibrates.<p>
+    <h1>System status</h1>
+    <p>Keep the spaceship running<p>
     <div class="module">
     <div class="countdown">
      <div class="countdown__time">

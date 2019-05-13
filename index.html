@@ -92,7 +92,7 @@ button:hover {
     //   this.$reset.on('click', this.resetTimer.bind(this));
     // },
     render: function() {
-        var totalTime = 60*1,
+        var totalTime = 1,
             display = this.$time;
         this.startTimer(totalTime, display);
         this.$time.removeClass('countdown__time--red');
@@ -108,6 +108,7 @@ button:hover {
        display.text(minutes + ':' + seconds);
         if (--timer < 0) {
           clearInterval(interval);
+          document.getElementById("toggle").style.visibility = 'hidden';
         };
       if (timer < 20) {
           display.addClass('countdown__time--orange')
@@ -134,7 +135,7 @@ countdownTimer.init();
     <div class="countdown">
      <div class="countdown__time">
       </div>
-    <button class="countdown__reset">Reset Timer</button>
+    <button class="countdown__reset" id="toggle">Reset Timer</button>
   </div>
     </div>
   </div>

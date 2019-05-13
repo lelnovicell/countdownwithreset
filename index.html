@@ -92,7 +92,7 @@ button:hover {
     //   this.$reset.on('click', this.resetTimer.bind(this));
     // },
     render: function() {
-        var totalTime = 1,
+        var totalTime = 60*1,
             display = this.$time;
         this.startTimer(totalTime, display);
         this.$time.removeClass('countdown__time--red');
